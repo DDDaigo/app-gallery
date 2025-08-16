@@ -1,0 +1,44 @@
+
+services:
+  backend:
+    build: ./backend
+    environment:
+      DB_URL: postgresql+psycopg2://app_gallery:${APP_DB_PASSWORD}@pg:5432/app_gallery
+      ADMIN_TOKEN: ${ADMIN_TOKEN}
+    expose: ["8000"]
+    networks: [webnet, dbnet]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${APP_NAME}-api.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`/api`)
+      - traefik.http.routers.${APP_NAME}-api.entrypoints=web  # 本番ではwebsecureに
+    # - traefik.http.routers.${APP_NAME}-api.tls.certresolver=cf  # 本番ではコメント解除
+      - traefik.http.services.${APP_NAME}-api.loadbalancer.server.port=8000
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    command: sh -lc "if [ ! -d node_modules ]; then npm ci; fi; npm run dev -- --host --port 5173"
+    # ← dev用: ホストのコードをそのまま中で使う（保存→即反映）
+    volumes:  #本番ではコメントアウト
+      - ./frontend:/app #本番ではコメントアウト
+      - /app/node_modules #本番ではコメントアウト
+    environment:
+      - VITE_API_BASE=http://${APP_DOMAIN}  # 本番ではhttpsに
+      # ← dev用: 変更検知の安定化（Windows/WSLで必須レベル）
+      - CHOKIDAR_USEPOLLING=true  #本番ではコメントアウト
+      - CHOKIDAR_INTERVAL=150  #本番ではコメントアウト
+    expose: ["5173"]
+    networks: [webnet]
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${APP_NAME}-web.rule=Host(`${APP_DOMAIN}`) && !PathPrefix(`/api`)
+      - traefik.http.routers.${APP_NAME}-web.entrypoints=web  # 本番ではwebsecureに
+    # - traefik.http.routers.${APP_NAME}-web.tls.certresolver=cf  # 本番ではコメント解除
+      - traefik.http.routers.${APP_NAME}-web.priority=10
+      - traefik.http.services.${APP_NAME}-web.loadbalancer.server.port=5173
+    restart: unless-stopped
+
+
+networks:
+  webnet: { external: true }
+  dbnet:  { external: true }

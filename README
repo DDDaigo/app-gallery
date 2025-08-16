@@ -1,0 +1,3 @@
+デプロイ時変更必要箇所
+・docker-compose.yml
+・.envファイル

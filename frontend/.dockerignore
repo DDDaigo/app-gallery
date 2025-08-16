@@ -1,0 +1,15 @@
+.git
+.gitignore
+node_modules
+dist
+dist-ssr
+npm-debug.log*
+yarn*.log*
+pnpm-lock.yaml
+# env はビルドコンテキストに載せない
+.env
+.env.*
+!.env.example
+.vscode
+.idea
+.DS_Store
