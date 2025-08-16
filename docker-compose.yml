@@ -9,8 +9,10 @@ services:
     networks: [webnet, dbnet]
     labels:
       - traefik.enable=true
+      - traefik.docker.network=webnet
       - traefik.http.routers.${APP_NAME}-api.rule=Host(`${APP_DOMAIN}`) && PathPrefix(`/api`)
       - traefik.http.routers.${APP_NAME}-api.entrypoints=web  # 本番ではwebsecureに
+      - traefik.http.routers.${APP_NAME}-api.priority=100
     # - traefik.http.routers.${APP_NAME}-api.tls.certresolver=cf  # 本番ではコメント解除
       - traefik.http.services.${APP_NAME}-api.loadbalancer.server.port=8000
     restart: unless-stopped
@@ -31,6 +33,7 @@ services:
     networks: [webnet]
     labels:
       - traefik.enable=true
+      - traefik.docker.network=webnet
       - traefik.http.routers.${APP_NAME}-web.rule=Host(`${APP_DOMAIN}`) && !PathPrefix(`/api`)
       - traefik.http.routers.${APP_NAME}-web.entrypoints=web  # 本番ではwebsecureに
     # - traefik.http.routers.${APP_NAME}-web.tls.certresolver=cf  # 本番ではコメント解除
