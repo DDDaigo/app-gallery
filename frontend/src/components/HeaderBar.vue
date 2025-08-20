@@ -21,27 +21,27 @@ function doSearch() {
 </script>
 
 <template>
-  <header class="sticky top-0 z-20 backdrop-blur bg-white/40">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
-      <RouterLink to="/" class="font-bold text-lg">Apps<span class="bg-[#9ccfbf]">.gallery</span></RouterLink>
+  <header class="top-0 z-20">
+    <div class="w-[90%] mx-auto mt-4 px-4 py-3 flex items-center gap-3 backdrop-blur bg-white/40 rounded-xl shadow">
+      <RouterLink to="/" class="sm:text-xl text-sm text-neutral-800">Apps<span class="text-[#9ccfbf]">.gallery</span></RouterLink>
       <div class="ml-auto flex items-center gap-2">
         <input
           :value="localQ"
           @input="(e)=>localQ = e.target.value"
           @keyup.enter="doSearch"
           placeholder="アプリ名で検索"
-          class="rounded-xl px-3 py-2 text-sm w-56"
+          class="rounded-xl px-3 py-2 text-sm w-32 text-neutral-500"
         />
         <select
           :value="localSort"
           @change="(e)=>{ localSort = e.target.value; doSearch(); }"
-          class="rounded-xl px-3 py-2 text-sm"
+          class="rounded-xl px-3 py-2 text-sm text-neutral-500"
         >
-          <option value="new">新着順</option>
-          <option value="title-asc">名前 A→Z</option>
-          <option value="title-desc">名前 Z→A</option>
+          <option value="new">New</option>
+          <option value="title-asc">A→Z</option>
+          <option value="title-desc">Z→A</option>
         </select>
-        <button @click="doSearch" class="rounded-xl bg-[#9ccfbf] text-white px-4 py-2 text-sm">検索</button>
+        <button @click="doSearch" class="rounded-xl bg-[#9ccfbf] text-white px-4 py-2 sm:text-sm text-xs text-nowrap">検索</button>
       </div>
     </div>
   </header>

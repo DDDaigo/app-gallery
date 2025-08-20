@@ -1,3 +1,10 @@
 デプロイ時変更必要箇所
 ・docker-compose.yml
 ・.envファイル
+
+
+
+更新作業時の注意点
+prodとdevで以下のファイルの内容が異なる。
+
+・vite.config.jsだけ違う

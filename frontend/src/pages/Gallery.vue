@@ -59,14 +59,14 @@ onMounted(fetchData);
     <HeaderBar :q="q" :sort="sort" @update:q="v=>q=v" @update:sort="v=>sort=v" @search="fetchData" />
 
     <main class="max-w-6xl mx-auto px-4 py-8">
-      <div v-if="loading" class="text-slate-600">読み込み中…</div>
+      <div v-if="loading" class="text-neutral-600">読み込み中…</div>
       <div v-else-if="error" class="text-red-600">エラー: {{ error }}</div>
 
       <div v-else class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
         <WindowCard v-for="p in projects" :key="p.id" :project="p" />
       </div>
 
-      <div v-if="!loading && !error && projects.length === 0" class="mt-10 text-center text-slate-600">
+      <div v-if="!loading && !error && projects.length === 0" class="mt-10 text-center text-neutral-600">
         該当するアプリがありません。
       </div>
     </main>
@@ -79,7 +79,9 @@ onMounted(fetchData);
   background-image:
     linear-gradient(0deg, rgba(255,255,255,0.25) 2px, transparent 2px),
     linear-gradient(90deg, rgba(255,255,255,0.22) 2px, transparent 2px);
-  background-size:50px 25px, 50px 25px;
+  background-size:40px 10px, 40px 10px;
   background-position:0 0, 25px 12.5px;
 }
 </style>
+
+

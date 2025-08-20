@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- 背景（白） -->
+  <rect width="256" height="256" rx="24" fill="#ffffff"/>
+  <!-- ごく淡い外枠で白地でも形がわかるように -->
+  <rect x="0.5" y="0.5" width="255" height="255" rx="24" fill="none" stroke="#e5e7eb"/>
+
+  <!-- グリッド（2×2） -->
+  <g transform="translate(36,36)">
+    <!-- サイズ計算：セル 88×88、隙間 8、2列で 88*2 + 8 = 184 に収まる -->
+    <!-- 左上 -->
+    <rect x="0"   y="0"   width="88" height="88" rx="12" fill="#111827"/>
+    <!-- 右上（強調） -->
+    <rect x="96"  y="0"   width="88" height="88" rx="12" fill="#9ccfbf"/>
+    <!-- 左下 -->
+    <rect x="0"   y="96"  width="88" height="88" rx="12" fill="#1f2937"/>
+    <!-- 右下 -->
+    <rect x="96"  y="96"  width="88" height="88" rx="12" fill="#374151"/>
+  </g>
+</svg>

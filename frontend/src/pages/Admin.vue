@@ -90,20 +90,20 @@ onMounted(loadAll);
 <template>
   <div>
     <HeaderBar />
-    <main class="container py-6 max-w-4xl space-y-6">
+    <main class="container py-6 px-6 mx-auto space-y-6 bg-neutral-200">
       <h1 class="text-xl font-semibold">Admin</h1>
 
       <!-- トークン -->
-      <div class="grid gap-3 p-4 border rounded-xl">
+      <div class="grid gap-3 rounded-xl">
         <div class="flex gap-2 items-center">
           <input v-model="token" placeholder="X-Admin-Token" class="border rounded-xl px-3 py-2 w-full"/>
-          <button @click="() => { setToken(token); checkToken(); }" class="rounded-xl border px-3 py-2 text-sm">保存と確認</button>
+          <button @click="() => { setToken(token); checkToken(); }" class="rounded-xl border px-3 py-2 text-sm text-nowrap">確認</button>
         </div>
         <p class="text-sm" :class="{'text-green-600': msg.includes('有効'), 'text-red-600': msg.includes('無効') }">{{ msg }}</p>
       </div>
 
       <!-- フォーム（新規/編集） -->
-      <div class="grid gap-3 p-4 border rounded-xl">
+      <div class="grid gap-3 p-4 rounded-xl">
         <h2 class="font-semibold">{{ editingId ? '編集' : '新規作成' }}</h2>
         <input v-model="f.title" placeholder="Title" class="border rounded-xl px-3 py-2"/>
         <input v-model="f.slug" placeholder="slug (unique)" class="border rounded-xl px-3 py-2"/>
@@ -118,7 +118,7 @@ onMounted(loadAll);
         <label class="inline-flex items-center gap-2 text-sm"><input type="checkbox" v-model="f.is_published"/> Published</label>
 
         <div class="flex gap-2">
-          <button @click="submit" class="rounded-xl bg-indigo-600 text-white px-4 py-2 text-sm">
+          <button @click="submit" class="rounded-xl bg-[#9ccfbf] text-white px-4 py-2 text-sm">
             {{ editingId ? '更新' : '作成' }}
           </button>
           <button v-if="editingId" @click="resetForm" class="rounded-xl border px-4 py-2 text-sm">キャンセル</button>
